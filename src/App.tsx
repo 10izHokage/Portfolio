@@ -1,35 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import {Route, BrowserRouter as Router, Routes} from "react-router-dom";
+import Header  from './components/Header';
+import Footer  from './components/Footer';
+import Home from './pages/Home';
+import About  from './pages/About';
+import Skills  from './pages/Skills';
+import Projects from './pages/Projects';
+import Contact  from './pages/Contact';
+import styled from 'styled-components';
 
-function App() {
-  const [count, setCount] = useState(0)
+const AppContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+`;
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const MainContent = styled.main`
+  flex: 1; 
+  display: flex;
+  flex-direction: column;
+`;
 
-export default App
+const App: React.FC = () => {
+    return (
+        <Router>
+            <AppContainer>
+                <Header />
+                <MainContent>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/skills" element={<Skills />} />
+                        <Route path="/projects" element={<Projects />} />
+                        <Route path="/contact" element={<Contact />} />
+                    </Routes>
+                </MainContent>
+                <Footer />
+            </AppContainer>
+        </Router>
+    );
+};
+
+export default App;
