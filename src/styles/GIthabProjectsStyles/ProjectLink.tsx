@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProjectLink = styled.a`
+export const ProjectLink = styled.a`
     text-decoration: none;
     color: #f8023a;
     font-weight: bold;
@@ -13,4 +13,3 @@ const ProjectLink = styled.a`
         background-color: #eaafbb;
     }
 `;
-export default ProjectLink;

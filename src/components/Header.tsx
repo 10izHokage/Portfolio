@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
+
 
 const HeaderContainer = styled.header`
   display: flex;
@@ -15,7 +16,7 @@ const HeaderContainer = styled.header`
 
 const Nav = styled.nav`
     display: flex;
-    gap: 11rem;
+    gap: 8rem;
     width: 80%; 
     margin: 0 auto;
     
@@ -43,6 +44,7 @@ const Header: React.FC = () => {
                 <StyledLink to="/skills">Skills</StyledLink>
                 <StyledLink to="/projects">Projects</StyledLink>
                 <StyledLink to="/contact">Contact</StyledLink>
+                <StyledLink to="/github-projects">GIthabProjects</StyledLink>
             </Nav>
         </HeaderContainer>
     );

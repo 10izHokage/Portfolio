@@ -6,6 +6,7 @@ import About  from './pages/About';
 import Skills  from './pages/Skills';
 import Projects from './pages/Projects';
 import Contact  from './pages/Contact';
+import GIthabProjects  from './pages/GIthabProjects.tsx';
 import styled from 'styled-components';
 
 const AppContainer = styled.div`
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                         <Route path="/skills" element={<Skills />} />
                         <Route path="/projects" element={<Projects />} />
                         <Route path="/contact" element={<Contact />} />
+                        <Route path="/github-projects" element={<GIthabProjects />} />
                     </Routes>
                 </MainContent>
                 <Footer />
