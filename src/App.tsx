@@ -11,6 +11,7 @@ import {AppContainer} from "@ styles/AppStyle/AppContainer.tsx";
 import {MainContent} from "@ styles/AppStyle/MainContent.tsx";
 
 export const App: React.FC = () => {
+    const username = '10izHokage';
     return (
         <Router>
             <AppContainer>
@@ -22,7 +23,7 @@ export const App: React.FC = () => {
                         <Route path="/skills" element={<Skills />} />
                         <Route path="/projects" element={<ProjectsPage />} />
                         <Route path="/contact" element={<Contact />} />
-                        <Route path="/github-projects" element={<GitHubProjects/>} />
+                        <Route path="/github-projects" element={<GitHubProjects username={username} />} />
                     </Routes>
                 </MainContent>
                 <Footer />
