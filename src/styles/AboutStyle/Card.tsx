@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Card = styled.div`
+export const Card = styled.div`
     border-radius: 12px;
     background-color: #f0c3fa;
     display: flex;
@@ -9,4 +9,3 @@ const Card = styled.div`
     padding: 10px;
     min-height: 86vh;
 `;
-export default Card;

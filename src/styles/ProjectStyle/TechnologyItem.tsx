@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TechnologyItem = styled.li`
+export const TechnologyItem = styled.li`
     background-color: #f8023a;
     padding: 5px 10px;
     border-radius: 5px;
@@ -8,4 +8,3 @@ const TechnologyItem = styled.li`
     font-family: Courier New, monospace;
     color: white;
 `;
-export default TechnologyItem;

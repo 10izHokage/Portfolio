@@ -1,10 +1,10 @@
-import MyPhoto from '../assets/HP_photo.jpg';
-import ProfileImage from "../styles/HomeStyle/ProfileImage.tsx";
-import Name from "../styles/HomeStyle/Name.tsx";
-import Info from "../styles/HomeStyle/Info.tsx";
-import PagesTemplate from "../styles/HomeStyle/PagesTemplate.tsx";
+import MyPhoto from '@/assets/HP_photo.jpg';
+import {ProfileImage} from "@ styles/HomeStyle/ProfileImage.tsx";
+import {Name} from "@ styles/HomeStyle/Name.tsx";
+import {Info} from "@ styles/HomeStyle/Info.tsx";
+import {PagesTemplate} from "@ styles/HomeStyle/PagesTemplate.tsx";
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
     return (
         <PagesTemplate>
             <ProfileImage src={MyPhoto}  />
@@ -20,5 +20,3 @@ const Home: React.FC = () => {
         </PagesTemplate>
 );
 };
-
-export default Home;

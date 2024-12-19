@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProfileImage = styled.img`
+export const ProfileImage = styled.img`
     width: 900px;
     height: 600px;
     border-radius: 5%;
@@ -9,4 +9,3 @@ const ProfileImage = styled.img`
     margin-left: 20px;
     margin-right:20px ;
 `;
-export default ProfileImage;

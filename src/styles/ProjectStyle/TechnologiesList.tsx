@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TechnologiesList = styled.ul`
+export const TechnologiesList = styled.ul`
   list-style: none;
   padding: 0;
   margin: 0;
@@ -8,4 +8,3 @@ const TechnologiesList = styled.ul`
   flex-wrap: wrap;
   gap: 5px;
 `;
-export default TechnologiesList;

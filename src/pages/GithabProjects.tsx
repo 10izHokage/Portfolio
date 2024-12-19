@@ -1,17 +1,16 @@
 import React, { useEffect } from 'react';
-import { useProjectStore } from '../store/useProjectStore';
-import {RefreshButton} from '../styles/GIthabProjectsStyles/RefreshButton.tsx';
-import {Error_Loading} from '../styles/GIthabProjectsStyles/Error_Loading.tsx';
-import {ProjectLanguage} from '../styles/GIthabProjectsStyles/ProjectLanguage.tsx';
-import {ProjectDescription} from '../styles/GIthabProjectsStyles/ProjectDescription.tsx';
-import {ProjectTitle} from '../styles/GIthabProjectsStyles/ProjectTitle.tsx';
-import {ProjectCard} from '../styles/GIthabProjectsStyles/ProjectCard.tsx';
-import {ProjectList} from '../styles/GIthabProjectsStyles/ProjectList.tsx';
-import {Container} from '../styles/GIthabProjectsStyles/Container.tsx';
-import {ProjectLink} from '../styles/GIthabProjectsStyles/ProjectLink.tsx';
+import { useProjectStore } from '@/store/useProjectStore';
+import {RefreshButton} from '@/styles/GithabProjectsStyles/RefreshButton.tsx';
+import {Error_Loading} from '@/styles/GithabProjectsStyles/Error_Loading.tsx';
+import {ProjectLanguage} from '@/styles/GithabProjectsStyles/ProjectLanguage.tsx';
+import {ProjectDescription} from '@/styles/GithabProjectsStyles/ProjectDescription.tsx';
+import {ProjectTitle} from '@/styles/GithabProjectsStyles/ProjectTitle.tsx';
+import {ProjectCard} from '@/styles/GithabProjectsStyles/ProjectCard.tsx';
+import {ProjectList} from '@/styles/GithabProjectsStyles/ProjectList.tsx';
+import {Container} from '@/styles/GithabProjectsStyles/Container.tsx';
+import {ProjectLink} from '@/styles/GithabProjectsStyles/ProjectLink.tsx';
 
-
-const GIthabProjects: React.FC = () => {
+export const GithabProjects: React.FC = () => {
     const { remoteProjects, status, error, fetchRemoteProjects } = useProjectStore();
     const username = '10izHokage';
 
@@ -53,5 +52,3 @@ const GIthabProjects: React.FC = () => {
         </Container>
     );
 };
-
-export default GIthabProjects;

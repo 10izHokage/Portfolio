@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import TechnologiesList from '../styles/ProjectStyle/TechnologiesList';
-import ProjectCard from '../styles/ProjectStyle/ProjectCard';
-import ProjectImage from '../styles/ProjectStyle/ProjectImage';
-import ProjectTitle from '../styles/ProjectStyle/ProjectTitle';
-import ProjectDescription from '../styles/ProjectStyle/ProjectDescription';
-import TechnologyItem from '../styles/ProjectStyle/TechnologyItem';
-import TechFilter from '../styles/ProjectStyle/TechFilter';
-import ProjectLink from '../styles/ProjectStyle/ProjectLink';
-import { Filter } from '../styles/ProjectStyle/Filter';
-import {DeleteButton} from '../styles/ProjectStyle/DeleteButton';
-import { useProjectStore } from '../store/useProjectStore';
-import { Projects } from '../Types/Projects';
+import {TechnologiesList} from '@ styles/ProjectStyle/TechnologiesList';
+import {ProjectCard} from '@ styles/ProjectStyle/ProjectCard';
+import {ProjectImage} from '@ styles/ProjectStyle/ProjectImage';
+import {ProjectTitle} from '@ styles/ProjectStyle/ProjectTitle';
+import {ProjectDescription} from '@ styles/ProjectStyle/ProjectDescription';
+import {TechnologyItem} from '@ styles/ProjectStyle/TechnologyItem';
+import {TechFilter} from '@ styles/ProjectStyle/TechFilter';
+import {ProjectLink} from '@ styles/ProjectStyle/ProjectLink';
+import { Filter } from '@ styles/ProjectStyle/Filter';
+import {DeleteButton} from '@ styles/ProjectStyle/DeleteButton';
+import { useProjectStore } from '@/store/useProjectStore';
+import { Projects } from '@/Types/Projects';
 import { v4 as uuidv4 } from 'uuid';
 
-const ProjectsComponent: React.FC = () => {
+export const ProjectsComponent: React.FC = () => {
     const [selectedTech, setSelectedTech] = useState<string>('All');
     const { projects, addProject, removeProject } = useProjectStore();
 
@@ -114,4 +114,4 @@ const ProjectsComponent: React.FC = () => {
     );
 };
 
-export default ProjectsComponent;
+

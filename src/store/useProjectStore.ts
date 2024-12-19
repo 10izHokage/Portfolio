@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { Projects } from '../Types/Projects';
-import { projects as initialProjects } from '../Data/projects';
-import { fetchRepos, Project } from '../services/githubService';
+import { Projects } from '@/Types/Projects';
+import { projects as initialProjects } from '@/Data/projects';
+import { fetchRepos, Project } from '@/services/githubService';
 
 interface ProjectState {
     projects: Projects[];

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const TechFilter = styled.select`
+export const TechFilter = styled.select`
     margin-bottom: 10px;
     padding: 5px;
     background-color: #434040;
@@ -10,4 +10,3 @@ const TechFilter = styled.select`
     border-radius: 5px;
     border-bottom-color: white;
 `;
-export default TechFilter;

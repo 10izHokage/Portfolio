@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import ContactForm from "../styles/ContactStyle/ContactForm.tsx";
-import Label from "../styles/ContactStyle/Label.tsx";
-import Input from "../styles/ContactStyle/Input.tsx";
-import Textarea from "../styles/ContactStyle/Textarea.tsx";
-import Button from "../styles/ContactStyle/Button.tsx";
-import ErrorMessage from "../styles/ContactStyle/ErrorMessage.tsx";
-import SuccessMessage from "../styles/ContactStyle/SuccessMessage.tsx";
+import {ContactForm} from "@ styles/ContactStyle/ContactForm.tsx";
+import {Label} from "@ styles/ContactStyle/Label.tsx";
+import {Input} from "@ styles/ContactStyle/Input.tsx";
+import {Textarea} from "@ styles/ContactStyle/Textarea.tsx";
+import {Button} from "@ styles/ContactStyle/Button.tsx";
+import {ErrorMessage} from "@ styles/ContactStyle/ErrorMessage.tsx";
+import {SuccessMessage} from "@ styles/ContactStyle/SuccessMessage.tsx";
 
 interface FormData {
     name: string;
@@ -17,7 +17,7 @@ const validateEmail = (email: string): boolean => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 };
 
-const Contact: React.FC = () => {
+export const Contact: React.FC = () => {
     const [formData, setFormData] = useState<FormData>({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState<{ name?: string; email?: string; message?: string }>({});
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -70,4 +70,3 @@ const Contact: React.FC = () => {
         </div>
     );
 };
-export default Contact;

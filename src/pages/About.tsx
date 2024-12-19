@@ -1,10 +1,10 @@
-import PageContainer from "../styles/AboutStyle/PageContainer.tsx";
-import Card from "../styles/AboutStyle/Card.tsx";
-import Title from "../styles/AboutStyle/Title.tsx";
-import Text from "../styles/AboutStyle/Text.tsx";
-import Subtitle from "../styles/AboutStyle/Subtitle.tsx";
+import {PageContainer} from "@ styles/AboutStyle/PageContainer.tsx";
+import {Card} from "@ styles/AboutStyle/Card.tsx";
+import {Title} from "@ styles/AboutStyle/Title.tsx";
+import {Text} from "@ styles/AboutStyle/Text.tsx";
+import {Subtitle} from "@ styles/AboutStyle/Subtitle.tsx";
 
-const About: React.FC = () => {
+export const About: React.FC = () => {
     return (
         <PageContainer>
             <Card>
@@ -23,5 +23,3 @@ const About: React.FC = () => {
         </PageContainer>
     );
 };
-
-export default About;
