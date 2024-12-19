@@ -1,8 +1,8 @@
 export interface Projects {
-    id: number;
+    id: string;
     title: string;
     description: string;
     technologies: string[];
     link: string;
-    imageUrl: string;
+    imageUrl?: string;
 }
