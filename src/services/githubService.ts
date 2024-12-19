@@ -8,7 +8,7 @@ interface GitHubRepo {
     language: string | null;
 }
 
-export interface Project {
+export interface GitProject {
     id: number;
     name: string;
     description: string | null;
@@ -18,7 +18,7 @@ export interface Project {
 
 const GITHUB_API_URL = 'https://api.github.com';
 
-export const fetchRepos = async (username: string, token?: string): Promise<Project[]> => {
+export const fetchRepos = async (username: string, token?: string): Promise<GitProject[]> => {
     const response = await axios.get<GitHubRepo[]>(`${GITHUB_API_URL}/users/${username}/repos`, {
         headers: token ? { Authorization: `token ${token}` } : {},
     });

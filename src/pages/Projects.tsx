@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useLocalProjectStore } from '@/store/LocalProjectStore.ts';
+import { Project } from '@/Types/Project';
 import {TechnologiesList} from '@ styles/ProjectStyle/TechnologiesList';
 import {ProjectCard} from '@ styles/ProjectStyle/ProjectCard';
 import {ProjectImage} from '@ styles/ProjectStyle/ProjectImage';
@@ -9,15 +11,13 @@ import {TechFilter} from '@ styles/ProjectStyle/TechFilter';
 import {ProjectLink} from '@ styles/ProjectStyle/ProjectLink';
 import { Filter } from '@ styles/ProjectStyle/Filter';
 import {DeleteButton} from '@ styles/ProjectStyle/DeleteButton';
-import { useProjectStore } from '@/store/useProjectStore';
-import { Projects } from '@/Types/Projects';
 import { v4 as uuidv4 } from 'uuid';
 
-export const ProjectsComponent: React.FC = () => {
+export const ProjectsPage: React.FC = () => {
     const [selectedTech, setSelectedTech] = useState<string>('All');
-    const { projects, addProject, removeProject } = useProjectStore();
+    const { projects, addProject, removeProject } = useLocalProjectStore();
 
-    const [newProject, setNewProject] = useState<Projects>({
+    const [newProject, setNewProject] = useState<Project>({
         id: '',
         title: '',
         description: '',
@@ -40,7 +40,7 @@ export const ProjectsComponent: React.FC = () => {
             alert('Title and Link are required.');
             return;
         }
-        const newProjectToAdd: Projects = {
+        const newProjectToAdd: Project = {
             ...newProject,
             id: uuidv4(),
         };
@@ -113,5 +113,6 @@ export const ProjectsComponent: React.FC = () => {
         </div>
     );
 };
+
 
 

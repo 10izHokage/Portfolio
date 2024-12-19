@@ -1,25 +1,25 @@
 import React, { useEffect } from 'react';
-import { useProjectStore } from '@/store/useProjectStore';
-import {RefreshButton} from '@/styles/GithabProjectsStyles/RefreshButton.tsx';
-import {Error_Loading} from '@/styles/GithabProjectsStyles/Error_Loading.tsx';
-import {ProjectLanguage} from '@/styles/GithabProjectsStyles/ProjectLanguage.tsx';
-import {ProjectDescription} from '@/styles/GithabProjectsStyles/ProjectDescription.tsx';
-import {ProjectTitle} from '@/styles/GithabProjectsStyles/ProjectTitle.tsx';
-import {ProjectCard} from '@/styles/GithabProjectsStyles/ProjectCard.tsx';
-import {ProjectList} from '@/styles/GithabProjectsStyles/ProjectList.tsx';
-import {Container} from '@/styles/GithabProjectsStyles/Container.tsx';
-import {ProjectLink} from '@/styles/GithabProjectsStyles/ProjectLink.tsx';
+import { useGitHubProjectStore } from '@/store/githubProjectStore';
+import { RefreshButton } from '@/styles/GithabProjectsStyles/RefreshButton.tsx';
+import { Error_Loading } from '@/styles/GithabProjectsStyles/Error_Loading.tsx';
+import { ProjectLanguage } from '@/styles/GithabProjectsStyles/ProjectLanguage.tsx';
+import { ProjectDescription } from '@/styles/GithabProjectsStyles/ProjectDescription.tsx';
+import { ProjectTitle } from '@/styles/GithabProjectsStyles/ProjectTitle.tsx';
+import { ProjectCard } from '@/styles/GithabProjectsStyles/ProjectCard.tsx';
+import { ProjectList } from '@/styles/GithabProjectsStyles/ProjectList.tsx';
+import { Container } from '@/styles/GithabProjectsStyles/Container.tsx';
+import { ProjectLink } from '@/styles/GithabProjectsStyles/ProjectLink.tsx';
 
-export const GithabProjects: React.FC = () => {
-    const { remoteProjects, status, error, fetchRemoteProjects } = useProjectStore();
+export const GitHubProjects: React.FC = () => {
+    const { projects: gitProjects, status, error, fetchProjects } = useGitHubProjectStore();
     const username = '10izHokage';
 
     useEffect(() => {
-        fetchRemoteProjects(username);
-    }, [fetchRemoteProjects, username]);
+        fetchProjects(username);
+    }, [fetchProjects, username]);
 
     const handleRefresh = () => {
-        fetchRemoteProjects(username);
+        fetchProjects(username);
     };
 
     return (
@@ -30,7 +30,7 @@ export const GithabProjects: React.FC = () => {
                 <>
                     <RefreshButton onClick={handleRefresh}>Обновить</RefreshButton>
                     <ProjectList>
-                        {remoteProjects.map((project) => (
+                        {gitProjects.map((project) => (
                             <ProjectCard key={project.id}>
                                 <ProjectTitle href={project.html_url} target="_blank">
                                     {project.name}
@@ -42,7 +42,8 @@ export const GithabProjects: React.FC = () => {
                                     Ссылка на репозиторий
                                 </ProjectLink>
                                 <ProjectLanguage>
-                                    Технологии: {project.language || 'Нет данных'}
+                                    {/* Проверка на null для language */}
+                                    Технологии: {project.language ? project.language : 'Нет данных'}
                                 </ProjectLanguage>
                             </ProjectCard>
                         ))}
@@ -52,3 +53,5 @@ export const GithabProjects: React.FC = () => {
         </Container>
     );
 };
+
+
