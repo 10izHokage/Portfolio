@@ -16,19 +16,31 @@ export interface GitProject {
     language: string | null;
 }
 
-const GITHUB_API_URL = 'https://api.github.com';
+//  инстанс axios с базовым URL
+const apiClient = axios.create({
+    baseURL: 'https://api.github.com',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+});
 
 export const fetchRepos = async (username: string, token?: string): Promise<GitProject[]> => {
-    const response = await axios.get<GitHubRepo[]>(`${GITHUB_API_URL}/users/${username}/repos`, {
-        headers: token ? { Authorization: `token ${token}` } : {},
-    });
+    try {
+        const response = await apiClient.get<GitHubRepo[]>(`/users/${username}/repos`, {
+            headers: token ? { Authorization: `token ${token}` } : {},
+        });
 
-    return response.data.map((repo) => ({
-        id: repo.id,
-        name: repo.name,
-        description: repo.description,
-        html_url: repo.html_url,
-        language: repo.language,
-    }));
+        return response.data.map((repo) => ({
+            id: repo.id,
+            name: repo.name,
+            description: repo.description,
+            html_url: repo.html_url,
+            language: repo.language,
+        }));
+    } catch (error) {
+        console.error('Ошибка при получении репозиториев:', error);
+        throw new Error('Не удалось загрузить репозитории. Попробуйте снова позже.');
+    }
 };
+
 
