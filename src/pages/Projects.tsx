@@ -1,17 +1,18 @@
 import React, { useState, useMemo } from 'react';
 import { useLocalProjectStore } from '@/store/LocalProjectStore.ts';
-import { Project } from '@/Types/Project';
-import { TechnologiesList } from '@ styles/ProjectStyle/TechnologiesList';
-import { ProjectCard } from '@ styles/ProjectStyle/ProjectCard';
-import { ProjectImage } from '@ styles/ProjectStyle/ProjectImage';
-import { ProjectTitle } from '@ styles/ProjectStyle/ProjectTitle';
-import { ProjectDescription } from '@ styles/ProjectStyle/ProjectDescription';
-import { TechnologyItem } from '@ styles/ProjectStyle/TechnologyItem';
-import { TechFilter } from '@ styles/ProjectStyle/TechFilter';
-import { Filter } from '@ styles/ProjectStyle/Filter';
-import { DeleteButton } from '@ styles/ProjectStyle/DeleteButton';
-import { ProjectLink } from '@ styles/ProjectStyle/ProjectLink';
+import { Project } from '@/Types/Project.ts';
+import { TechnologiesList } from '@ styles/ProjectStyle/TechnologiesList.tsx';
+import { ProjectCard } from '@ styles/ProjectStyle/ProjectCard.tsx';
+import { ProjectImage } from '@ styles/ProjectStyle/ProjectImage.tsx';
+import { ProjectTitle } from '@ styles/ProjectStyle/ProjectTitle.tsx';
+import { ProjectDescription } from '@ styles/ProjectStyle/ProjectDescription.tsx';
+import { TechnologyItem } from '@ styles/ProjectStyle/TechnologyItem.tsx';
+import { TechFilter } from '@ styles/ProjectStyle/TechFilter.tsx';
+import { Filter } from '@ styles/ProjectStyle/Filter.tsx';
+import { DeleteButton } from '@ styles/ProjectStyle/DeleteButton.tsx';
+import { ProjectLink } from '@ styles/ProjectStyle/ProjectLink.tsx';
 import { v4 as uuidv4 } from 'uuid';
+import { motion } from 'framer-motion';
 
 export const ProjectsPage: React.FC = () => {
     const [selectedTech, setSelectedTech] = useState<string>('All');
@@ -34,7 +35,12 @@ export const ProjectsPage: React.FC = () => {
     }, [projects, selectedTech]);
 
     return (
-        <div>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 3}}
+        >
             {notification && <div className="notification">{notification}</div>}
 
             <TechFilter value={selectedTech} onChange={(e) => setSelectedTech(e.target.value)}>
@@ -60,11 +66,11 @@ export const ProjectsPage: React.FC = () => {
                     handleNotification('Проект успешно удален!');
                 }}
             />
-        </div>
+        </motion.div>
     );
 };
 
-const AddProjectForm: React.FC<{ onAddProject: (project: Project) => void }> = ({ onAddProject }) => {
+const AddProjectForm: React.FC<{ onAddProject: (project: Project) => void }> = ({onAddProject}) => {
     const [newProject, setNewProject] = useState<Project>({
         id: '',
         title: '',

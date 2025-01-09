@@ -10,6 +10,7 @@ import { ProjectCard } from '@/styles/GithabProjectsStyles/ProjectCard.tsx';
 import { ProjectList } from '@/styles/GithabProjectsStyles/ProjectList.tsx';
 import { Container } from '@/styles/GithabProjectsStyles/Container.tsx';
 import { ProjectLink } from '@/styles/GithabProjectsStyles/ProjectLink.tsx';
+import { motion } from 'framer-motion';
 
 interface GitHubProjectsProps {
     username: string;
@@ -28,40 +29,47 @@ export const GitHubProjects: React.FC<GitHubProjectsProps> = ({ username }) => {
 
     return (
         <Container>
-            {status === 'loading' && <LoadingIndicator />}
+            <motion.div
+                initial={{opacity: 0}}
+                animate={{opacity: 1}}
+                exit={{opacity: 0}}
+                transition={{duration: 3}}
+            >
+                {status === 'loading' && <LoadingIndicator/>}
 
-            {status === 'failed' && <ErrorMessage message={error || 'Произошла ошибка'} />}
+                {status === 'failed' && <ErrorMessage message={error || 'Произошла ошибка'}/>}
 
-            {status === 'succeeded' && (
-                <>
-                    <RefreshButton onClick={handleRefresh}>Обновить</RefreshButton>
-                    {gitProjects.length === 0 ? (
-                        <ErrorMessage message="Проекты не найдены" />
-                    ) : (
-                        <ProjectList>
-                            {gitProjects.map((project) => (
-                                <ProjectCard key={project.id}>
-                                    <ProjectTitle href={project.html_url} target="_blank">
-                                        {project.name}
-                                    </ProjectTitle>
-                                    <ProjectDescription>
-                                        {project.description || 'Описание недоступно'}
-                                    </ProjectDescription>
-                                    <ProjectLink href={project.html_url} target="_blank" rel="noopener noreferrer">
-                                        Ссылка на репозиторий
-                                    </ProjectLink>
-                                    <ProjectLanguage>
-                                        {}
-                                        Технологии: {project.language ?? 'Нет данных'}
-                                    </ProjectLanguage>
-                                </ProjectCard>
-                            ))}
-                        </ProjectList>
-                    )}
-                </>
-            )}
+                {status === 'succeeded' && (
+                    <>
+                        <RefreshButton onClick={handleRefresh}>Обновить</RefreshButton>
+                        {gitProjects.length === 0 ? (
+                            <ErrorMessage message="Проекты не найдены"/>
+                        ) : (
+                            <ProjectList>
+                                {gitProjects.map((project) => (
+                                    <ProjectCard key={project.id}>
+                                        <ProjectTitle href={project.html_url} target="_blank">
+                                            {project.name}
+                                        </ProjectTitle>
+                                        <ProjectDescription>
+                                            {project.description || 'Описание недоступно'}
+                                        </ProjectDescription>
+                                        <ProjectLink href={project.html_url} target="_blank" rel="noopener noreferrer">
+                                            Ссылка на репозиторий
+                                        </ProjectLink>
+                                        <ProjectLanguage>
+                                            {}
+                                            Технологии: {project.language ?? 'Нет данных'}
+                                        </ProjectLanguage>
+                                    </ProjectCard>
+                                ))}
+                            </ProjectList>
+                        )}
+                    </>
+                )}
+            </motion.div>
         </Container>
-    );
+);
 };
 
 
