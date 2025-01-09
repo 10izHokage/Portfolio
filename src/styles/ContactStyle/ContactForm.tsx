@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ContactForm = styled.form`
+export const ContactForm = styled.form`
     display: flex;
     flex-direction: column;
     width: 800px; 
@@ -12,4 +12,3 @@ const ContactForm = styled.form`
     border-radius: 5px;
     background-color: #322f2f;
 `;
-export default ContactForm;

@@ -1,11 +1,11 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVk, faTelegram} from "@fortawesome/free-brands-svg-icons";
-import FooterContainer from "../styles/FooterStyle/FooterContainer.tsx";
-import FooterText from "../styles/FooterStyle/FooterText.tsx";
-import IconLinks from "../styles/FooterStyle/IconLinks.tsx";
-import IconLink from "../styles/FooterStyle/IconLink.tsx";
+import {FooterContainer} from "@ styles/FooterStyle/FooterContainer.tsx";
+import {FooterText} from "@ styles/FooterStyle/FooterText.tsx";
+import {IconLinks} from "@ styles/FooterStyle/IconLinks.tsx";
+import {IconLink} from "@ styles/FooterStyle/IconLink.tsx";
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
     return (
         <FooterContainer>
             <FooterText>© 2024 10IzHokage</FooterText>
@@ -21,4 +21,3 @@ const Footer: React.FC = () => {
     );
 };
 
-export default Footer;

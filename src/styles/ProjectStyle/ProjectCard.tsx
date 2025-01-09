@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProjectCard = styled.div`
+export const ProjectCard = styled.div`
     border: 1px solid #ccc;
     padding: 15px;
     margin-bottom: 15px;
@@ -15,4 +15,3 @@ const ProjectCard = styled.div`
         box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
     }
 `;
-export default ProjectCard;

@@ -1,8 +1,8 @@
 import { v4 as uuidv4 } from 'uuid';
-import { Projects } from '../Types/Projects';
-import project_1 from '../assets/project_1.jpg';
-import project_2 from '../assets/project_2.jpg';
-import project_3 from '../assets/project_3.jpg';
+import { Project } from '@/Types/Project';
+import project_1 from '@/assets/project_1.jpg';
+import project_2 from '@/assets/project_2.jpg';
+import project_3 from '@/assets/project_3.jpg';
 
 const initialProjectsData = [
     {
@@ -28,7 +28,8 @@ const initialProjectsData = [
     },
 ];
 
-export const projects: Projects[] = initialProjectsData.map((p) => ({
+export const projects: Project[] = initialProjectsData.map((p) => ({
     ...p,
     id: uuidv4(),
 }));
+

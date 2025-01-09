@@ -1,19 +1,19 @@
-import pythonImg from '../assets/python.jpg';
-import cImg from '../assets/1c.png';
-import cppImg from '../assets/cpp.png';
-import cssImg from '../assets/css.png';
-import sqlImg from '../assets/sql.png';
-import kotlinImg from '../assets/kotlin.png';
-import jetbrainsImg from '../assets/jetbrains.png';
-import vscodeImg from '../assets/vscode.png';
-import oneCenterpriseImg from '../assets/1c_enterprise.png';
-import kritaImg from '../assets/krita.png';
-import PageContainer from "../styles/SkillsStyle/PageContainer.tsx";
-import SkillItem from "../styles/SkillsStyle/SkillItem.tsx";
-import SkillImage from "../styles/SkillsStyle/SkillImage.tsx";
-import SkillName from "../styles/SkillsStyle/SkillName.tsx";
+import pythonImg from '@/assets/python.jpg';
+import cImg from '@/assets/1c.png';
+import cppImg from '@/assets/cpp.png';
+import cssImg from '@/assets/css.png';
+import sqlImg from '@/assets/sql.png';
+import kotlinImg from '@/assets/kotlin.png';
+import jetbrainsImg from '@/assets/jetbrains.png';
+import vscodeImg from '@/assets/vscode.png';
+import oneCenterpriseImg from '@/assets/1c_enterprise.png';
+import kritaImg from '@/assets/krita.png';
+import {PageContainer} from "@ styles/SkillsStyle/PageContainer.tsx";
+import {SkillItem} from "@ styles/SkillsStyle/SkillItem.tsx";
+import {SkillImage} from "@ styles/SkillsStyle/SkillImage.tsx";
+import {SkillName} from "@ styles/SkillsStyle/SkillName.tsx";
 
-const Skills: React.FC = () => {
+export const Skills: React.FC = () => {
     const skillsData = [
         { name: "Python", image: pythonImg },
         { name: "1C", image: cImg },
@@ -38,5 +38,3 @@ const Skills: React.FC = () => {
         </PageContainer>
     );
 };
-
-export default Skills;

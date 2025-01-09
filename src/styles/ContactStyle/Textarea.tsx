@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Textarea = styled.textarea`
+export const Textarea = styled.textarea`
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -10,4 +10,3 @@ const Textarea = styled.textarea`
     color: #322f2f;
     font-family: Courier New, monospace;
 `;
-export default Textarea;

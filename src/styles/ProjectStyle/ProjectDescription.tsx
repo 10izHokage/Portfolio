@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const ProjectDescription = styled.p`
+export const ProjectDescription = styled.p`
     margin-bottom: 10px;
     overflow: hidden; /* Обрезаем длинные описания */
     text-overflow: ellipsis; /* Многоточие в конце */
@@ -13,4 +13,3 @@ const ProjectDescription = styled.p`
     font-family: Courier New, monospace;
     color: #151515;
 `;
-export default ProjectDescription;

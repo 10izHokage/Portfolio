@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const FooterContainer = styled.footer`
+export const FooterContainer = styled.footer`
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -8,4 +8,3 @@ const FooterContainer = styled.footer`
     background-color: #322f2f;
     border-radius: 5px 5px 0 0;
 `;
-export default FooterContainer;

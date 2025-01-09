@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const SuccessMessage = styled.p`
+export const SuccessMessage = styled.p`
     font-size: 1.8rem;
     text-align: center;
     letter-spacing: 0.1rem;
@@ -9,4 +9,3 @@ const SuccessMessage = styled.p`
     color: #322f2f;
     font-family: Courier New, monospace;
 `;
-export default SuccessMessage;

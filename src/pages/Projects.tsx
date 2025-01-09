@@ -1,23 +1,71 @@
-import React, { useState } from 'react';
-import TechnologiesList from '../styles/ProjectStyle/TechnologiesList';
-import ProjectCard from '../styles/ProjectStyle/ProjectCard';
-import ProjectImage from '../styles/ProjectStyle/ProjectImage';
-import ProjectTitle from '../styles/ProjectStyle/ProjectTitle';
-import ProjectDescription from '../styles/ProjectStyle/ProjectDescription';
-import TechnologyItem from '../styles/ProjectStyle/TechnologyItem';
-import TechFilter from '../styles/ProjectStyle/TechFilter';
-import ProjectLink from '../styles/ProjectStyle/ProjectLink';
-import { Filter } from '../styles/ProjectStyle/Filter';
-import {DeleteButton} from '../styles/ProjectStyle/DeleteButton';
-import { useProjectStore } from '../store/useProjectStore';
-import { Projects } from '../Types/Projects';
+import React, { useState, useMemo } from 'react';
+import { useLocalProjectStore } from '@/store/LocalProjectStore.ts';
+import { Project } from '@/Types/Project';
+import { TechnologiesList } from '@ styles/ProjectStyle/TechnologiesList';
+import { ProjectCard } from '@ styles/ProjectStyle/ProjectCard';
+import { ProjectImage } from '@ styles/ProjectStyle/ProjectImage';
+import { ProjectTitle } from '@ styles/ProjectStyle/ProjectTitle';
+import { ProjectDescription } from '@ styles/ProjectStyle/ProjectDescription';
+import { TechnologyItem } from '@ styles/ProjectStyle/TechnologyItem';
+import { TechFilter } from '@ styles/ProjectStyle/TechFilter';
+import { Filter } from '@ styles/ProjectStyle/Filter';
+import { DeleteButton } from '@ styles/ProjectStyle/DeleteButton';
+import { ProjectLink } from '@ styles/ProjectStyle/ProjectLink';
 import { v4 as uuidv4 } from 'uuid';
 
-const ProjectsComponent: React.FC = () => {
+export const ProjectsPage: React.FC = () => {
     const [selectedTech, setSelectedTech] = useState<string>('All');
-    const { projects, addProject, removeProject } = useProjectStore();
+    const [notification, setNotification] = useState<string | null>(null);
+    const { projects, addProject, removeProject } = useLocalProjectStore();
 
-    const [newProject, setNewProject] = useState<Projects>({
+    const uniqueTechnologies = useMemo(() => {
+        return Array.from(new Set(projects.flatMap((project) => project.technologies)));
+    }, [projects]);
+
+    const handleNotification = (message: string, timeout = 3000) => {
+        setNotification(message);
+        setTimeout(() => setNotification(null), timeout);
+    };
+
+    const filteredProjects = useMemo(() => {
+        return projects.filter((project) =>
+            selectedTech === 'All' ? true : project.technologies.includes(selectedTech)
+        );
+    }, [projects, selectedTech]);
+
+    return (
+        <div>
+            {notification && <div className="notification">{notification}</div>}
+
+            <TechFilter value={selectedTech} onChange={(e) => setSelectedTech(e.target.value)}>
+                <option value="All">Все технологии</option>
+                {uniqueTechnologies.map((tech) => (
+                    <option key={tech} value={tech}>
+                        {tech}
+                    </option>
+                ))}
+            </TechFilter>
+
+            <AddProjectForm
+                onAddProject={(newProject) => {
+                    addProject(newProject);
+                    handleNotification('Проект успешно добавлен!');
+                }}
+            />
+
+            <ProjectList
+                projects={filteredProjects}
+                onDeleteProject={(projectId) => {
+                    removeProject(projectId);
+                    handleNotification('Проект успешно удален!');
+                }}
+            />
+        </div>
+    );
+};
+
+const AddProjectForm: React.FC<{ onAddProject: (project: Project) => void }> = ({ onAddProject }) => {
+    const [newProject, setNewProject] = useState<Project>({
         id: '',
         title: '',
         description: '',
@@ -34,67 +82,77 @@ const ProjectsComponent: React.FC = () => {
         }));
     };
 
+    const validateUrl = (url: string): boolean => {
+        const pattern = new RegExp(
+            '^(https?:\\/\\/)' +
+            '((([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.)+[a-zA-Z]{2,}|' +
+            '((\\d{1,3}\\.){3}\\d{1,3}))' +
+            '(\\:\\d+)?(\\/[-a-zA-Z\\d%_.~+]*)*' +
+            '(\\?[;&a-zA-Z\\d%_.~+=-]*)?' +
+            '(\\#[-a-zA-Z\\d_]*)?$',
+            'i'
+        );
+        return pattern.test(url);
+    };
+
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
         if (!newProject.title || !newProject.link) {
-            alert('Title and Link are required.');
+            alert('Название и ссылка обязательны.');
             return;
         }
-        const newProjectToAdd: Projects = {
-            ...newProject,
-            id: uuidv4(),
-        };
-        addProject(newProjectToAdd);
+        if (!validateUrl(newProject.link)) {
+            alert('Некорректный URL.');
+            return;
+        }
+        const newProjectToAdd: Project = { ...newProject, id: uuidv4() };
+        onAddProject(newProjectToAdd);
         setNewProject({ id: '', title: '', description: '', technologies: [], link: '', imageUrl: '' });
     };
 
-    const filteredProjects = projects.filter((project) =>
-        selectedTech === 'All' ? true : project.technologies.includes(selectedTech)
-    );
-
     return (
-        <div>
-            <TechFilter value={selectedTech} onChange={(e) => setSelectedTech(e.target.value)}>
-                <option value="All">Все технологии</option>
-                {Array.from(new Set(projects.flatMap((project) => project.technologies))).map((tech) => (
-                    <option key={tech} value={tech}>
-                        {tech}
-                    </option>
-                ))}
-            </TechFilter>
-            <form onSubmit={handleSubmit}>
-                <Filter>
-                    <input
-                        type="text"
-                        name="title"
-                        value={newProject.title}
-                        onChange={handleInputChange}
-                        placeholder="Название проекта"
-                    />
-                    <textarea
-                        name="description"
-                        value={newProject.description}
-                        onChange={handleInputChange}
-                        placeholder="Описание проекта"
-                    />
-                    <input
-                        type="text"
-                        name="link"
-                        value={newProject.link}
-                        onChange={handleInputChange}
-                        placeholder="Ссылка на проект"
-                    />
-                    <input
-                        type="text"
-                        name="technologies"
-                        value={newProject.technologies.join(',')}
-                        onChange={handleInputChange}
-                        placeholder="Технологии"
-                    />
-                    <button type="submit">Добавить проект</button>
-                </Filter>
-            </form>
-            {filteredProjects.map((project) => (
+        <form onSubmit={handleSubmit}>
+            <Filter>
+                <input
+                    type="text"
+                    name="title"
+                    value={newProject.title}
+                    onChange={handleInputChange}
+                    placeholder="Название проекта"
+                />
+                <textarea
+                    name="description"
+                    value={newProject.description}
+                    onChange={handleInputChange}
+                    placeholder="Описание проекта"
+                />
+                <input
+                    type="text"
+                    name="link"
+                    value={newProject.link}
+                    onChange={handleInputChange}
+                    placeholder="Ссылка на проект"
+                />
+                <input
+                    type="text"
+                    name="technologies"
+                    value={newProject.technologies.join(',')}
+                    onChange={handleInputChange}
+                    placeholder="Технологии"
+                />
+                <button type="submit">Добавить проект</button>
+            </Filter>
+        </form>
+    );
+};
+
+const ProjectList: React.FC<{
+    projects: Project[];
+    onDeleteProject: (id: string) => void;
+}> = ({ projects, onDeleteProject }) => {
+    return (
+        <>
+            {projects.map((project) => (
                 <ProjectCard key={project.id}>
                     <ProjectImage src={project.imageUrl || '/placeholder.jpg'} alt={project.title} />
                     <ProjectTitle>{project.title}</ProjectTitle>
@@ -107,11 +165,13 @@ const ProjectsComponent: React.FC = () => {
                     <ProjectLink href={project.link} target="_blank" rel="noopener noreferrer">
                         Ссылка на проект
                     </ProjectLink>
-                    <DeleteButton onClick={() => removeProject(project.id)}>Удалить проект</DeleteButton>
+                    <DeleteButton onClick={() => onDeleteProject(project.id)}>Удалить проект</DeleteButton>
                 </ProjectCard>
             ))}
-        </div>
+        </>
     );
 };
 
-export default ProjectsComponent;
+
+
+

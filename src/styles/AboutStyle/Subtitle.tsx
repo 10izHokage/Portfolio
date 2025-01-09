@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const Subtitle = styled.p`
+export const Subtitle = styled.p`
     font-size: 2.1rem;
     text-align: inherit;
     letter-spacing: 0.1rem;
@@ -10,4 +10,3 @@ const Subtitle = styled.p`
     font-family: Courier New;
 
 `;
-export default Subtitle;
