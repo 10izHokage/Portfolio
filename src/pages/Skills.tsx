@@ -12,6 +12,7 @@ import {PageContainer} from "@ styles/SkillsStyle/PageContainer.tsx";
 import {SkillItem} from "@ styles/SkillsStyle/SkillItem.tsx";
 import {SkillImage} from "@ styles/SkillsStyle/SkillImage.tsx";
 import {SkillName} from "@ styles/SkillsStyle/SkillName.tsx";
+import { motion } from 'framer-motion';
 
 export const Skills: React.FC = () => {
     const skillsData = [
@@ -28,13 +29,21 @@ export const Skills: React.FC = () => {
     ];
 
     return (
-        <PageContainer>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 3}}
+        >
+            <PageContainer>
                 {skillsData.map((skill) => (
                     <SkillItem key={skill.name}>
-                     <SkillImage src={skill.image} alt={skill.name} />
-                     <SkillName>{skill.name}</SkillName>
-                 </SkillItem>
-             ))}
-        </PageContainer>
-    );
-};
+                        <SkillImage src={skill.image} alt={skill.name}/>
+                        <SkillName>{skill.name}</SkillName>
+                    </SkillItem>
+                ))}
+
+            </PageContainer>
+        </motion.div>
+            );
+            };

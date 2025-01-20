@@ -1,9 +1,13 @@
 import React from "react";
-import {HeaderContainer} from '@ styles/HeaderStyle/HeaderContainer.tsx';
-import {Nav} from '@ styles/HeaderStyle/Nav.tsx';
-import {StyledLink} from '@ styles/HeaderStyle/StyledLink.tsx';
+import { HeaderContainer } from "@ styles/HeaderStyle/HeaderContainer";
+import { Nav } from "@ styles/HeaderStyle/Nav";
+import { StyledLink } from "@ styles/HeaderStyle/StyledLink";
+import { ThemeToggleButton } from "@ styles/HeaderStyle/ThemeToggleButton";
+import { useTheme } from "@/context/ThemeContext";
 
 export const Header: React.FC = () => {
+    const { toggleTheme, theme } = useTheme();
+
     return (
         <HeaderContainer>
             <Nav>
@@ -14,6 +18,11 @@ export const Header: React.FC = () => {
                 <StyledLink to="/contact">Contact</StyledLink>
                 <StyledLink to="/github-projects">GithabProjects</StyledLink>
             </Nav>
+            <ThemeToggleButton onClick={toggleTheme}>
+                {theme === "light" ? "Switch to Dark" : "Switch to Light"}
+            </ThemeToggleButton>
         </HeaderContainer>
     );
 };
+
+

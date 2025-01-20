@@ -6,6 +6,8 @@ import {Textarea} from "@ styles/ContactStyle/Textarea.tsx";
 import {Button} from "@ styles/ContactStyle/Button.tsx";
 import {ErrorMessage} from "@ styles/ContactStyle/ErrorMessage.tsx";
 import {SuccessMessage} from "@ styles/ContactStyle/SuccessMessage.tsx";
+import {ContacTemplate} from "@/styles/ContactStyle/ContacTemplate.tsx";
+import { motion } from 'framer-motion';
 
 interface FormData {
     name: string;
@@ -47,26 +49,34 @@ export const Contact: React.FC = () => {
     };
 
     return (
-        <div>
-            {isSubmitted && <SuccessMessage>Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время</SuccessMessage>}
-            <ContactForm onSubmit={handleSubmit}>
-                <div>
-                    <Label htmlFor="name">Имя:</Label>
-                    <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
-                    {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
-                </div>
-                <div>
-                    <Label htmlFor="email">Email:</Label>
-                    <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange} />
-                    {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
-                </div>
-                <div>
-                    <Label htmlFor="message">Сообщение:</Label>
-                    <Textarea id="message" name="message" value={formData.message} onChange={handleChange} />
-                    {errors.message && <ErrorMessage>{errors.message}</ErrorMessage>}
-                </div>
-                <Button type="submit">Отправить</Button>
-            </ContactForm>
-        </div>
+        <motion.div
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+            transition={{duration: 3}}
+        >
+            {isSubmitted &&
+                <SuccessMessage>Спасибо за ваше сообщение! Мы свяжемся с вами в ближайшее время</SuccessMessage>}
+            <ContacTemplate>
+                <ContactForm onSubmit={handleSubmit}>
+                    <div>
+                        <Label htmlFor="name">Имя:</Label>
+                        <Input type="text" id="name" name="name" value={formData.name} onChange={handleChange}/>
+                        {errors.name && <ErrorMessage>{errors.name}</ErrorMessage>}
+                    </div>
+                    <div>
+                        <Label htmlFor="email">Email:</Label>
+                        <Input type="email" id="email" name="email" value={formData.email} onChange={handleChange}/>
+                        {errors.email && <ErrorMessage>{errors.email}</ErrorMessage>}
+                    </div>
+                    <div>
+                        <Label htmlFor="message">Сообщение:</Label>
+                        <Textarea id="message" name="message" value={formData.message} onChange={handleChange}/>
+                        {errors.message && <ErrorMessage>{errors.message}</ErrorMessage>}
+                    </div>
+                    <Button type="submit">Отправить</Button>
+                </ContactForm>
+            </ContacTemplate>
+        </motion.div>
     );
 };

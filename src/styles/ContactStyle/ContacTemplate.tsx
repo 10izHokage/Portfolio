@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { media } from "@ styles/media";
 
-export const PageContainer = styled.div`
+export const ContacTemplate = styled.div`
   display: flex;
   flex-direction: column;
   align-items: inherit;
